@@ -1,0 +1,27 @@
+.vdgallery-kolom {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -.5rem;
+    margin-left: -.5rem;
+}
+.vdgallery-kolom .vdgallery-item {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 25%;
+    -moz-box-flex: 0;
+    -ms-flex: 0 0 25%;
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding-right: .5rem;
+    padding-left: .5rem;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+.vdgallery-kolom .vdgallery-item a {
+    display: inline-block;
+}

@@ -24,11 +24,11 @@ function vdgallery_showgallery( $atts ) {
 
                 <div class="vdgallery-kolom">
                 <?php foreach($vdgaleri['media'] as $idmedia): ?>
-
-                    <a href="<?php echo wp_get_attachment_image_src($idmedia,'full')[0]; ?>">
-                        <img src="<?php echo wp_get_attachment_image_src($idmedia,$size)[0]; ?>">
-                    </a>
-
+                    <div class="vdgallery-item">
+                        <a class="vdgallery-item-link" href="<?php echo wp_get_attachment_image_src($idmedia,'full')[0]; ?>">
+                            <img class="vdgallery-item-image" src="<?php echo wp_get_attachment_image_src($idmedia,$size)[0]; ?>">
+                        </a>
+                    </div>
                 <?php endforeach;?>
                 </div>
 

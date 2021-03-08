@@ -1,2 +1,4 @@
-# vd-gallery
-Plugin gallery wordpress
+# VD gallery
+Plugin gallery wordpress dari Velocity developer
+
+

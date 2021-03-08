@@ -68,21 +68,18 @@ if ( ! function_exists( 'admin_vdgallery_enqueue' ) ) {
             wp_enqueue_style( 'my_vdgallery_style', plugin_dir_url(__FILE__) . 'admin/css/admin.css');
         }
     }
-}
+}// endif function_exists( 'admin_vdgallery_enqueue' ).
 add_action('admin_enqueue_scripts', 'admin_vdgallery_enqueue');
 
-if ( ! function_exists( 'vsstemmart_scripts' ) ) {
+if ( ! function_exists( 'vdgallery_scripts_enqueue' ) ) {
 	/**
 	 * Load plugin sources.
 	 */
-	function vsstemmart_scripts() {
-		// Get the theme data.
-		$the_theme = wp_get_theme();
-		wp_enqueue_style( 'vsstemmart-styles', get_stylesheet_directory_uri() . '/css/theme.min.css', array(), $the_theme->get( 'Version' ), false );
+	function vdgallery_scripts_enqueue() {
+		wp_enqueue_style( 'vdgallery-styles', plugin_dir_url(__FILE__) . 'public/css/style.css', array(), VD_GALLERY_VERSION, false );
 	}
-} // endif function_exists( 'vsstemmart_scripts' ).
-
-add_action( 'wp_enqueue_scripts', 'vsstemmart_scripts' );
+} // endif function_exists( 'vdgallery_scripts_enqueue' ).
+add_action( 'wp_enqueue_scripts', 'vdgallery_scripts_enqueue' );
  
 /**
  * Register file public.

@@ -58,8 +58,11 @@ add_action( 'add_meta_boxes', 'vdgallery_register_meta_boxes' );
 * @param WP_Post $post Current post object.
 */
 function vdgallery_display_callback( $post ) {
-  $getId = isset($_GET['post'])?$_GET['post']:'';
-  $datagaleri = get_post_meta( $post->ID, 'vdgaleri', true );
+  $getId        = isset($_GET['post'])?$_GET['post']:'';
+  $datagaleri   = get_post_meta( $post->ID, 'vdgaleri', true );
+  $datasize     = $datagaleri?$datagaleri['option']['size']:'';
+  $datakolom    = $datagaleri?$datagaleri['option']['kolom']:'4';
+  $datakolomres = $datagaleri?$datagaleri['option']['kolomresponsif']:'2';
   // print_r($datagaleri);
   wp_nonce_field( basename( __FILE__ ), 'vdgallery_post_nonce' );
   ?>
@@ -105,25 +108,25 @@ function vdgallery_display_callback( $post ) {
   <table>
     <tr>
       <td>Ukuran tampil</td>
-      <td>
+      <td>: 
         <select name="vdgaleri-post[option][size]">
-          <option value="thumbnail" <?php selected( $datagaleri['option']['size'],'thumbnail'); ?>>Thumbnail</option>
-          <option value="full" <?php selected( $datagaleri['option']['size'],'full'); ?>>Full</option>
-          <option value="medium" <?php selected( $datagaleri['option']['size'],'medium'); ?>>Medium</option>
-          <option value="large" <?php selected( $datagaleri['option']['size'],'large'); ?>>large</option>
+          <option value="thumbnail" <?php selected( $datasize,'thumbnail'); ?>>Thumbnail</option>
+          <option value="full" <?php selected( $datasize,'full'); ?>>Full</option>
+          <option value="medium" <?php selected( $datasize,'medium'); ?>>Medium</option>
+          <option value="large" <?php selected( $datasize,'large'); ?>>large</option>
         </select>
       </td>
     </tr>
     <tr>
       <td>Baris tampil</td>
       <td>
-        <input name="vdgaleri-post[option][kolom]" value="<?php echo $datagaleri['option']['kolom']?$datagaleri['option']['kolom']:'4'; ?>" type="number" min="0">
+        : <input name="vdgaleri-post[option][kolom]" value="<?php echo $datakolom; ?>" type="number" min="0">
       </td>
     </tr>
     <tr>
       <td>Baris tampil responsif</td>
       <td>
-        <input name="vdgaleri-post[option][kolomresponsif]" value="<?php echo $datagaleri['option']['kolomresponsif']?$datagaleri['option']['kolomresponsif']:'2'; ?>" type="number" min="0">
+        : <input name="vdgaleri-post[option][kolomresponsif]" value="<?php echo $datakolomres; ?>" type="number" min="0">
       </td>
     </tr>
   </table>

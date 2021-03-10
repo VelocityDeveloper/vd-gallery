@@ -8,4 +8,13 @@ jQuery(function($){
             }
         });
     });
+    $('.gallery').each(function() {
+        $(this).magnificPopup({
+            delegate: '.gallery-item a',
+            type: 'image',
+            gallery: {
+              enabled:true
+            }
+        });
+    });
 });

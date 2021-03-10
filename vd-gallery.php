@@ -63,7 +63,7 @@ if ( ! function_exists( 'admin_vdgallery_enqueue' ) ) {
      * vdgallery-script
      */
     function admin_vdgallery_enqueue($hook) {
-        if ('post.php' == $hook) {
+        if ('post.php' == $hook || 'post-new.php' == $hook) {
             wp_enqueue_script('my_vdgallery_script', plugin_dir_url(__FILE__) . 'admin/js/script.js');
             wp_enqueue_style( 'my_vdgallery_style', plugin_dir_url(__FILE__) . 'admin/css/admin.css');
         }

@@ -9,6 +9,7 @@ jQuery(function($){
         });
     });
     $('.gallery').each(function() {
+        $(this).find('.gallery-item').addClass('vd-gallery-modif');
         $(this).magnificPopup({
             delegate: '.gallery-item a',
             type: 'image',

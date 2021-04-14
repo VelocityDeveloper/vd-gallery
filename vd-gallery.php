@@ -52,6 +52,23 @@ function vdgallery_post_type() {
 }
 
 /**
+ * Call file media Upload.
+ * shortcode
+ */
+add_action('admin_enqueue_scripts', function() {
+    global $post;
+
+    wp_enqueue_script('media-upload');
+    wp_enqueue_script('thickbox');
+    wp_enqueue_style('thickbox');
+
+    wp_enqueue_media(array(
+        'post' => $post->ID,
+    ));
+});
+
+
+/**
  * Register meta boxes.
  * vdgallery-meta
  */

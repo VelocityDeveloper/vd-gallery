@@ -20,11 +20,12 @@ function vdgallery_showgallery( $atts ) {
     if($id && $vdgaleri):
     ?>
         <div class="vdgallery-galleryshow vdgallery-galleryshow-<?php echo $idnode;?>" data-node="<?php echo $idnode;?>" data-id="<?php echo $id;?>">
-            <?php if($vdgaleri['media']): ?> 
+            
+            <?php if(isset($vdgaleri['media'])&&!empty($vdgaleri['media'])): ?> 
 
                 <div class="vdgallery-kolom">
                 <?php foreach($vdgaleri['media'] as $idmedia): ?>
-                    <div class="vdgallery-item">
+                    <div class="vdgallery-item vdgallery-item-<?php echo $idmedia;?>" data-id="<?php echo $idmedia;?>">
                         <a class="vdgallery-item-link" href="<?php echo wp_get_attachment_image_src($idmedia,'full')[0]; ?>">
                             <img class="vdgallery-item-image" src="<?php echo wp_get_attachment_image_src($idmedia,$size)[0]; ?>">
                         </a>
@@ -33,6 +34,13 @@ function vdgallery_showgallery( $atts ) {
                 </div>
 
             <?php endif;?>
+
+            <style>
+                .vdgallery-galleryshow-<?php echo $idnode;?> {
+                    position: relative;
+                }
+            </style>
+            
         </div>
     <?php
     endif; //endif have ID & meta vdgaleri

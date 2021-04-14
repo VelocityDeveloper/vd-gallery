@@ -15,6 +15,10 @@ function vdgallery_showgallery( $atts ) {
     //set value by meta vdgaleri
     $vdgaleri   = get_post_meta( $id, 'vdgaleri', true );
     $size       = $vdgaleri['option']['size']?$vdgaleri['option']['size']:'thumbnail';
+    $kolom      = $vdgaleri['option']['kolom']?$vdgaleri['option']['kolom']:1;
+    $koloms     = 100/$kolom;
+    $kolomres   = $vdgaleri['option']['kolomresponsif']?$vdgaleri['option']['kolomresponsif']:1;
+    $kolomress  = 100/$kolomres;
 
     ///show if have ID & meta vdgaleri
     if($id && $vdgaleri):
@@ -38,6 +42,20 @@ function vdgallery_showgallery( $atts ) {
             <style>
                 .vdgallery-galleryshow-<?php echo $idnode;?> {
                     position: relative;
+                }
+                .vdgallery-galleryshow-<?php echo $idnode;?> .vdgallery-item {
+                    -webkit-flex: 0 0 <?php echo $kolomress;?>%;
+                    -ms-flex: 0 0 <?php echo $kolomress;?>%;
+                    flex: 0 0 <?php echo $kolomress;?>%;
+                    max-width: <?php echo $kolomress;?>%;
+                }
+                @media (min-width: 768px) {
+                    .vdgallery-galleryshow-<?php echo $idnode;?> .vdgallery-item {
+                        -webkit-flex: 0 0 <?php echo $koloms;?>%;
+                        -ms-flex: 0 0 <?php echo $koloms;?>%;
+                        flex: 0 0 <?php echo $koloms;?>%;
+                        max-width: <?php echo $koloms;?>%;
+                    }
                 }
             </style>
             

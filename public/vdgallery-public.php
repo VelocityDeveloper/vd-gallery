@@ -1,5 +1,6 @@
 <?php
-// [thumbnail id='']
+// [vdgallery id='']
+add_shortcode( 'vdgallery', 'vdgallery_showgallery' );
 function vdgallery_showgallery( $atts ) {
     ob_start();   
 
@@ -65,4 +66,54 @@ function vdgallery_showgallery( $atts ) {
 
     return ob_get_clean();
 }
-add_shortcode( 'vdgallery', 'vdgallery_showgallery' );
+
+// [vdgalleryslide id='']
+add_shortcode( 'vdgalleryslide', 'vdgallery_showslide' );
+function vdgallery_showslide( $atts ) {
+    ob_start();   
+
+    //generate node/id uniqe for shortcode 
+    $idnode = 'vd'.uniqid();
+
+    //set attribute shortcode
+    $atribut = shortcode_atts( array(
+        'id' => '',
+    ), $atts );
+    $id         = $atribut['id'];
+
+    //set value by meta vdgaleri
+    $vdgaleri   = get_post_meta( $id, 'vdgaleri', true );
+
+    ///show if have ID & meta vdgaleri
+    if($id && $vdgaleri):
+    ?>
+    <div class="vdgallery-slideshow vdgallery-slideshow-<?php echo $idnode;?>" data-node="<?php echo $idnode;?>" data-id="<?php echo $id;?>">
+        
+        <?php if(isset($vdgaleri['media'])&&!empty($vdgaleri['media'])): ?>
+
+            <div class="vdgallery-slide">
+                <?php foreach($vdgaleri['media'] as $idmedia): ?>
+                    <div class="vdgallery-item vdgallery-item-<?php echo $idmedia;?>" data-id="<?php echo $idmedia;?>">
+                        <img class="vdgallery-item-image" src="<?php echo wp_get_attachment_image_src($idmedia,'full')[0]; ?>">
+                    </div>
+                <?php endforeach;?>
+            </div>
+
+        <?php endif;?>
+
+        <script>
+            jQuery(function($){
+                $('.vdgallery-slideshow-<?php echo $idnode;?> .vdgallery-slide').slick({
+                    infinite: true,
+                    slidesToShow: 3,
+                    slidesToScroll: 3
+                });
+            });
+        </script>
+
+    </div>
+    <?php
+    endif; //endif have ID & meta vdgaleri
+
+    return ob_get_clean();
+}

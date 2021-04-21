@@ -18,4 +18,13 @@ jQuery(function($){
             }
         });
     });
+    $('.vdgallery-slide-box').each(function() {
+        var node = $(this).data('node');
+        
+        $('.vdgallery-slideshow-'+node+' .vdgallery-slide').slick({
+            infinite: true,
+            slidesToShow: 1,
+            slidesToScroll: 1
+        });
+    });
 });

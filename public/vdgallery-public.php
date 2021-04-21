@@ -91,25 +91,17 @@ function vdgallery_showslide( $atts ) {
         
         <?php if(isset($vdgaleri['media'])&&!empty($vdgaleri['media'])): ?>
 
-            <div class="vdgallery-slide">
-                <?php foreach($vdgaleri['media'] as $idmedia): ?>
-                    <div class="vdgallery-item vdgallery-item-<?php echo $idmedia;?>" data-id="<?php echo $idmedia;?>">
-                        <img class="vdgallery-item-image" src="<?php echo wp_get_attachment_image_src($idmedia,'full')[0]; ?>">
-                    </div>
-                <?php endforeach;?>
+            <div class="vdgallery-slide-box" data-node="<?php echo $idnode;?>">
+                <div class="vdgallery-slide">
+                    <?php foreach($vdgaleri['media'] as $idmedia): ?>
+                        <div class="vdgallery-item vdgallery-item-<?php echo $idmedia;?>" data-id="<?php echo $idmedia;?>">
+                            <img class="vdgallery-item-image" src="<?php echo wp_get_attachment_image_src($idmedia,'full')[0]; ?>" />
+                        </div>
+                    <?php endforeach;?>
+                </div>
             </div>
 
         <?php endif;?>
-
-        <script>
-            jQuery(function($){
-                $('.vdgallery-slideshow-<?php echo $idnode;?> .vdgallery-slide').slick({
-                    infinite: true,
-                    slidesToShow: 3,
-                    slidesToScroll: 3
-                });
-            });
-        </script>
 
     </div>
     <?php

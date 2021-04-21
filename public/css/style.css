@@ -25,3 +25,14 @@
 .vdgallery-kolom .vdgallery-item a {
     display: inline-block;
 }
+.vdgallery-slideshow .vdgallery-item-image {
+    width: 100%;
+}
+.vdgallery-slideshow .slick-next {
+    right: 2px;
+    z-index: 1;
+}
+.vdgallery-slideshow .slick-prev {
+    left: 2px;
+    z-index: 1;
+}

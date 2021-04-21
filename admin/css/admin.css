@@ -33,3 +33,21 @@
     margin-left: 1rem;
     font-weight: bold;
 }
+.vdgallery-tabs-link {
+    display: flex;
+}
+.vdgallery-tabs-link li:not(:last-child) {
+    padding-right: .4rem;
+}
+.vdgallery-tabs-link .tabs-link {
+    border-width: 1px 1px 0;
+    border-style: solid;
+    border-color: #ddd;
+    padding: .5rem 1rem;
+    cursor: pointer;
+    background-color: #ddd;
+}
+.vdgallery-tabs-link .tabs-link.active {
+    box-shadow: 1px -1px 2px rgb(0 0 0 / 11%);
+    background-color: #fff;
+}

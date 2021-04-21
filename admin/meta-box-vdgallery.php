@@ -105,31 +105,46 @@ function vdgallery_display_callback( $post ) {
 
   <br><hr><br>
 
-  <table>
-    <tr>
-      <td>Ukuran tampil</td>
-      <td>: 
-        <select name="vdgaleri-post[option][size]">
-          <option value="thumbnail" <?php selected( $datasize,'thumbnail'); ?>>Thumbnail</option>
-          <option value="full" <?php selected( $datasize,'full'); ?>>Full</option>
-          <option value="medium" <?php selected( $datasize,'medium'); ?>>Medium</option>
-          <option value="large" <?php selected( $datasize,'large'); ?>>large</option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td>Baris tampil</td>
-      <td>
-        : <input name="vdgaleri-post[option][kolom]" value="<?php echo $datakolom; ?>" type="number" min="0">
-      </td>
-    </tr>
-    <tr>
-      <td>Baris tampil responsif</td>
-      <td>
-        : <input name="vdgaleri-post[option][kolomresponsif]" value="<?php echo $datakolomres; ?>" type="number" min="0">
-      </td>
-    </tr>
-  </table>
+  <div class="vdgallery-tabs">
+    <ul class="vdgallery-tabs-link">
+      <li><span class="tabs-link" data-target="tab-1">Galeri</span></li>
+      <li><span class="tabs-link" data-target="tab-2">Slideshow</span></li>
+    </ul>
+    <div class="vdgallery-tabs-opt">
+      <div class="tabs-item" data-target="tab-1">
+           
+        <table>
+          <tr>
+            <td>Ukuran tampil</td>
+            <td>: 
+              <select name="vdgaleri-post[option][size]">
+                <option value="thumbnail" <?php selected( $datasize,'thumbnail'); ?>>Thumbnail</option>
+                <option value="full" <?php selected( $datasize,'full'); ?>>Full</option>
+                <option value="medium" <?php selected( $datasize,'medium'); ?>>Medium</option>
+                <option value="large" <?php selected( $datasize,'large'); ?>>large</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Baris tampil</td>
+            <td>
+              : <input name="vdgaleri-post[option][kolom]" value="<?php echo $datakolom; ?>" type="number" min="0">
+            </td>
+          </tr>
+          <tr>
+            <td>Baris tampil responsif</td>
+            <td>
+              : <input name="vdgaleri-post[option][kolomresponsif]" value="<?php echo $datakolomres; ?>" type="number" min="0">
+            </td>
+          </tr>
+        </table>
+
+      </div>
+      <div class="tabs-item" data-target="tab-2">
+        <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+      </div>
+    </div>
+  </div>
 
   <?php
 }

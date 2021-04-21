@@ -92,15 +92,15 @@ function vdgallery_showslide( $atts ) {
         <?php if(isset($vdgaleri['media'])&&!empty($vdgaleri['media'])): ?>
 
             <div class="vdgallery-slide-box" data-node="<?php echo $idnode;?>">
-                <div class="vdgallery-slide">
+                <div class="vdgallery-slide" data-flickity='{ "cellAlign": "left", "contain": true }'>
                     <?php foreach($vdgaleri['media'] as $idmedia): ?>
-                        <div class="vdgallery-item vdgallery-item-<?php echo $idmedia;?>" data-id="<?php echo $idmedia;?>">
-                            <img class="vdgallery-item-image" src="<?php echo wp_get_attachment_image_src($idmedia,'full')[0]; ?>" />
+                        <div class="vdgallery-item vdgallery-item-<?php echo $idmedia;?> w-100" data-id="<?php echo $idmedia;?>">
+                            <img class="vdgallery-item-image" src="<?php echo wp_get_attachment_image_src($idmedia,'full')[0]; ?>">
                         </div>
                     <?php endforeach;?>
                 </div>
             </div>
-
+            
         <?php endif;?>
 
     </div>

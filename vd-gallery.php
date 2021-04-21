@@ -93,12 +93,11 @@ if ( ! function_exists( 'vdgallery_scripts_enqueue' ) ) {
 	 * Load plugin sources.
 	 */
 	function vdgallery_scripts_enqueue() {
-		wp_enqueue_style( 'slick-theme-styles', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css', array(), VD_GALLERY_VERSION, false );
-        wp_enqueue_style( 'slick-styles', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css', array(), VD_GALLERY_VERSION, false );
+        wp_enqueue_style( 'flickity-styles', 'https://unpkg.com/flickity@2/dist/flickity.min.css', array(), VD_GALLERY_VERSION, false );
 		wp_enqueue_style( 'magnific-popup-styles', 'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/magnific-popup.min.css', array(), VD_GALLERY_VERSION, false );
 		wp_enqueue_style( 'vdgallery-styles', plugin_dir_url(__FILE__) . 'public/css/style.css', array(), VD_GALLERY_VERSION, false );
         wp_enqueue_script( 'jquery');
-		wp_enqueue_script( 'slick-carousel', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js', array(), VD_GALLERY_VERSION, true );
+		wp_enqueue_script( 'flickity-script', 'https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js', array(), VD_GALLERY_VERSION, true );
 		wp_enqueue_script( 'magnific-popup-script', 'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js', array(), VD_GALLERY_VERSION, true );
         wp_enqueue_script( 'vdgallery-script', plugin_dir_url(__FILE__) . 'public/js/script.js', array(), VD_GALLERY_VERSION, true );
 	}

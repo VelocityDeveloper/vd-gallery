@@ -72,28 +72,12 @@ function vdgallery_display_callback( $post ) {
   $dataperslideres    = $datagaleri?$datagaleri['option']['persliderespon']:'1';
   $navbtn             = $datagaleri?$datagaleri['option']['navbtn']:'';
   $navdots            = $datagaleri?$datagaleri['option']['navdots']:'';
+  $autoplay           = $datagaleri?$datagaleri['option']['autoplay']:1;
+  $infinite           = $datagaleri?$datagaleri['option']['infinite']:1;
 
   // print_r($datagaleri);
   wp_nonce_field( basename( __FILE__ ), 'vdgallery_post_nonce' );
   ?>
-
-  <?php if($getId): ?>
-    <div class="vdgallery-shortcode">
-      <div><strong>Shortcode</strong></div>
-      <br>
-      <table>
-        <tr>
-            <td>Gallery</td>
-            <td> : <span>[vdgallery id="<?php echo $getId; ?>"]</span></td>
-        </tr>
-        <tr>
-            <td>Slide</td>
-            <td> : <span>[vdgalleryslide id="<?php echo $getId; ?>"]</span></td>
-        </tr>
-      </table>
-    </div>
-    <br><hr><br>
-  <?php endif; ?>
 
   <div class="vdgallery-tabs">
     <ul class="vdgallery-tabs-link">
@@ -115,7 +99,7 @@ function vdgallery_display_callback( $post ) {
               <?php $idunik = uniqid(); ?>
               <div class="vdgallery-image vdgallery-image-<?php echo $idunik; ?>" data-node="<?php echo $idunik; ?>" data-id="<?php echo $galeri; ?>">
                   <input name="vdgaleri-post[media][]" value="<?php echo $galeri; ?>" type="hidden">
-                  <img src="<?php echo wp_get_attachment_image_src($galeri)[0]; ?>">
+                  <img src="<?php echo wp_get_attachment_image_src($galeri)[0]; ?>" alt="">
                   <div class="vdgallery-option">
                       <span class="vdgallery-remove dashicons dashicons-no-alt"></span>
                   </div>
@@ -173,13 +157,13 @@ function vdgallery_display_callback( $post ) {
           <tr>
             <td>Tampil per Slide</td>
             <td>
-              : <input name="vdgaleri-post[option][perslide]" value="<?php echo $dataperslide; ?>" type="number" min="1" class="vdgallery-input">
+              : <input name="vdgaleri-post[option][perslide]" value="<?php echo $dataperslide; ?>" type="number" min="1" max="50" class="vdgallery-input">
             </td>
           </tr>
           <tr>
             <td>Tampil per Slide responsif</td>
             <td>
-              : <input name="vdgaleri-post[option][persliderespon]" value="<?php echo $dataperslideres; ?>" type="number" min="1" class="vdgallery-input">
+              : <input name="vdgaleri-post[option][persliderespon]" value="<?php echo $dataperslideres; ?>" type="number" min="1" max="3" class="vdgallery-input">
             </td>
           </tr>
           <tr>
@@ -200,10 +184,67 @@ function vdgallery_display_callback( $post ) {
               </select>
             </td>
           </tr>
+          <tr>
+            <td>Autoplay</td>
+            <td>: 
+              <select name="vdgaleri-post[option][autoplay]" class="vdgallery-input">
+                <option value="1" <?php selected( $autoplay,1); ?>>Ya</option>
+                <option value="0" <?php selected( $autoplay,0); ?>>Tidak</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Infinite</td>
+            <td>: 
+              <select name="vdgaleri-post[option][infinite]" class="vdgallery-input">
+                <option value="1" <?php selected( $infinite,1); ?>>Ya</option>
+                <option value="0" <?php selected( $infinite,0); ?>>Tidak</option>
+              </select>
+            </td>
+          </tr>
         </table>
       </div>
     </div>
   </div>
 
+  <?php
+}
+
+
+/**
+ * Register meta boxes.
+ */
+add_action( 'add_meta_boxes', 'vdgallery_register_side_boxes' );
+function vdgallery_register_side_boxes() {
+  add_meta_box(
+       'vdgallery-meta-side', 
+       'Shortcode Galeri', 
+       'vdgallery_display_sideback', 
+       'vdgallery',
+       'side',
+       'default',
+       ''
+  );
+}
+
+function vdgallery_display_sideback() {
+  $getId        = isset($_GET['post'])?$_GET['post']:'';
+  ?>
+  <?php if($getId): ?>
+      <div class="vdgallery-shortcode">
+        <table>
+          <tr>
+              <td>Gallery</td>
+              <td> : </td>
+              <td><span>[vdgallery id="<?php echo $getId; ?>"]</span></td>
+          </tr>
+          <tr>
+              <td>Slide</td>
+              <td> : </td>
+              <td><span>[vdgalleryslide id="<?php echo $getId; ?>"]</span></td>
+          </tr>
+        </table>
+      </div>
+  <?php endif; ?>
   <?php
 }

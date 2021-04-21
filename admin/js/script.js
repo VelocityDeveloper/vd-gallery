@@ -42,7 +42,7 @@ jQuery(document).ready(function() {
           var id = attachment.id;
           var url = attachment.attributes.sizes.thumbnail?attachment.attributes.sizes.thumbnail.url:attachment.attributes.url;
 
-          jQuery(".vdgallery-main").append(`<div class="vdgallery-image vdgallery-image-${nodeid}" data-node="${nodeid}" data-id="${id}"><input name="vdgaleri-post[media][]" value="${id}" type="hidden"><img src="${url}"><div class="vdgallery-option"><span class="vdgallery-remove dashicons dashicons-no-alt"></span></div></div>`);
+          jQuery(".vdgallery-main").append(`<div class="vdgallery-image vdgallery-image-${nodeid}" data-node="${nodeid}" data-id="${id}"><input name="vdgaleri-post[media][]" value="${id}" type="hidden"><img src="${url}" alt=""><div class="vdgallery-option"><span class="vdgallery-remove dashicons dashicons-no-alt"></span></div></div>`);
       });
       // galleryFrame.close();
   });

@@ -82,14 +82,20 @@ function vdgallery_showslide( $atts ) {
     $id         = $atribut['id'];
 
     //set value by meta vdgaleri
-    $vdgaleri   = get_post_meta( $id, 'vdgaleri', true );
+    $vdgaleri       = get_post_meta( $id, 'vdgaleri', true );
+    $size           = $vdgaleri['option']['slidesize']?$vdgaleri['option']['slidesize']:'full';
+    $perslide       = $vdgaleri['option']['perslide']?$vdgaleri['option']['perslide']:100;
+    $perslideres    = $vdgaleri['option']['persliderespon']?$vdgaleri['option']['persliderespon']:100;
 
     //flickity opt
     $flickity   = [
         'contain'           => true,
         'cellAlign'         => 'left',
+        'adaptiveHeight'    => false,
         'prevNextButtons'   => (bool)$vdgaleri['option']['navbtn'],
         'pageDots'          => (bool)$vdgaleri['option']['navdots'],
+        'autoPlay'          => (bool)$vdgaleri['option']['autoplay'],
+        'wrapAround'        => (bool)$vdgaleri['option']['infinite'],
     ];
     $flickity   = json_encode($flickity);
 
@@ -103,14 +109,25 @@ function vdgallery_showslide( $atts ) {
             <div class="vdgallery-slide-box" data-node="<?php echo $idnode;?>">
                 <div class="vdgallery-slide" data-flickity='<?php echo $flickity;?>'>
                     <?php foreach($vdgaleri['media'] as $idmedia): ?>
-                        <div class="vdgallery-item vdgallery-item-<?php echo $idmedia;?> w-50" data-id="<?php echo $idmedia;?>">
-                            <img class="vdgallery-item-image" src="<?php echo wp_get_attachment_image_src($idmedia,'full')[0]; ?>">
+                        <div class="vdgallery-item vdgallery-item-<?php echo $idmedia;?>" data-id="<?php echo $idmedia;?>">
+                            <img class="vdgallery-item-image" src="<?php echo wp_get_attachment_image_src($idmedia,$size)[0]; ?>">
                         </div>
                     <?php endforeach;?>
                 </div>
             </div>
             
         <?php endif;?>
+
+        <style>
+            .vdgallery-slideshow-<?php echo $idnode;?> .vdgallery-item {
+                width: <?php echo 100/$perslideres;?>%;
+            }
+            @media (min-width: 768px) {
+                .vdgallery-slideshow-<?php echo $idnode;?> .vdgallery-item {
+                    width: <?php echo 100/$perslide;?>%;
+                }
+            }
+        </style>
 
     </div>
     <?php

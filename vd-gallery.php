@@ -80,10 +80,8 @@ if ( ! function_exists( 'admin_vdgallery_enqueue' ) ) {
      * vdgallery-script
      */
     function admin_vdgallery_enqueue($hook) {
-        if ('post.php' == $hook || 'post-new.php' == $hook) {
-            wp_enqueue_script('my_vdgallery_script', plugin_dir_url(__FILE__) . 'admin/js/script.js');
-            wp_enqueue_style( 'my_vdgallery_style', plugin_dir_url(__FILE__) . 'admin/css/admin.css');
-        }
+        wp_enqueue_script('admin-vdgallery-script', plugin_dir_url(__FILE__) . 'admin/js/script.js');
+        wp_enqueue_style( 'admin-vdgallery-style', plugin_dir_url(__FILE__) . 'admin/css/admin.css');
     }
 }// endif function_exists( 'admin_vdgallery_enqueue' ).
 add_action('admin_enqueue_scripts', 'admin_vdgallery_enqueue');

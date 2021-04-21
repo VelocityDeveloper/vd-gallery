@@ -103,6 +103,27 @@ if ( ! function_exists( 'vdgallery_scripts_enqueue' ) ) {
 add_action( 'wp_enqueue_scripts', 'vdgallery_scripts_enqueue' );
  
 /**
+ * Custom columns vdgallery.
+ */
+add_filter( 'manage_vdgallery_posts_columns', 'set_custom_edit_vdgallery_columns' );
+function set_custom_edit_vdgallery_columns($columns) {
+    $columns['sgaleri'] = __( 'Shortcode Galeri', 'vdgallery' );
+    $columns['sslideshow'] = __( 'Shortcode Slideshow', 'vdgallery' );
+    return $columns;
+}
+add_action( 'manage_vdgallery_posts_custom_column' , 'custom_vdgallery_column', 10, 2 );
+function custom_vdgallery_column( $column, $post_id ) {
+    switch ( $column ) {
+        case 'sgaleri' :
+            echo '[vdgallery id="'.$post_id.'"]';
+            break;
+        case 'sslideshow' :
+            echo '[vdgalleryslide id="'.$post_id.'"]';
+            break;
+    }
+}
+
+/**
  * Register file public.
  * shortcode
  */

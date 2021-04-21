@@ -84,6 +84,15 @@ function vdgallery_showslide( $atts ) {
     //set value by meta vdgaleri
     $vdgaleri   = get_post_meta( $id, 'vdgaleri', true );
 
+    //flickity opt
+    $flickity   = [
+        'contain'           => true,
+        'cellAlign'         => 'left',
+        'prevNextButtons'   => (bool)$vdgaleri['option']['navbtn'],
+        'pageDots'          => (bool)$vdgaleri['option']['navdots'],
+    ];
+    $flickity   = json_encode($flickity);
+
     ///show if have ID & meta vdgaleri
     if($id && $vdgaleri):
     ?>
@@ -92,9 +101,9 @@ function vdgallery_showslide( $atts ) {
         <?php if(isset($vdgaleri['media'])&&!empty($vdgaleri['media'])): ?>
 
             <div class="vdgallery-slide-box" data-node="<?php echo $idnode;?>">
-                <div class="vdgallery-slide" data-flickity='{ "cellAlign": "left", "contain": true }'>
+                <div class="vdgallery-slide" data-flickity='<?php echo $flickity;?>'>
                     <?php foreach($vdgaleri['media'] as $idmedia): ?>
-                        <div class="vdgallery-item vdgallery-item-<?php echo $idmedia;?> w-100" data-id="<?php echo $idmedia;?>">
+                        <div class="vdgallery-item vdgallery-item-<?php echo $idmedia;?> w-50" data-id="<?php echo $idmedia;?>">
                             <img class="vdgallery-item-image" src="<?php echo wp_get_attachment_image_src($idmedia,'full')[0]; ?>">
                         </div>
                     <?php endforeach;?>

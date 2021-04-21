@@ -60,9 +60,19 @@ add_action( 'add_meta_boxes', 'vdgallery_register_meta_boxes' );
 function vdgallery_display_callback( $post ) {
   $getId        = isset($_GET['post'])?$_GET['post']:'';
   $datagaleri   = get_post_meta( $post->ID, 'vdgaleri', true );
+
+  //gallery
   $datasize     = $datagaleri?$datagaleri['option']['size']:'';
   $datakolom    = $datagaleri?$datagaleri['option']['kolom']:'4';
   $datakolomres = $datagaleri?$datagaleri['option']['kolomresponsif']:'2';
+
+  ///slideshow
+  $datasizes          = $datagaleri?$datagaleri['option']['slidesize']:'full';
+  $dataperslide       = $datagaleri?$datagaleri['option']['perslide']:'1';
+  $dataperslideres    = $datagaleri?$datagaleri['option']['persliderespon']:'1';
+  $navbtn             = $datagaleri?$datagaleri['option']['navbtn']:'';
+  $navdots            = $datagaleri?$datagaleri['option']['navdots']:'';
+
   // print_r($datagaleri);
   wp_nonce_field( basename( __FILE__ ), 'vdgallery_post_nonce' );
   ?>
@@ -85,63 +95,112 @@ function vdgallery_display_callback( $post ) {
     <br><hr><br>
   <?php endif; ?>
 
-  <div class="vdgallery-main">
-    <?php if($datagaleri && $datagaleri['media']): ?>
-      <?php foreach($datagaleri['media'] as $galeri): ?>
-        <?php $idunik = uniqid(); ?>
-        <div class="vdgallery-image vdgallery-image-<?php echo $idunik; ?>" data-node="<?php echo $idunik; ?>" data-id="<?php echo $galeri; ?>">
-            <input name="vdgaleri-post[media][]" value="<?php echo $galeri; ?>" type="hidden">
-            <img src="<?php echo wp_get_attachment_image_src($galeri)[0]; ?>">
-            <div class="vdgallery-option">
-                <span class="vdgallery-remove dashicons dashicons-no-alt"></span>
-            </div>
-        </div>
-      <?php endforeach; ?>
-    <?php endif; ?>
-  </div>
-  <div class="box-vdgallery-clone">
-    <span class="button vdgallery-add">+ Edit Galeri</span> 
-  </div>
-
-  <br><hr><br>
-
   <div class="vdgallery-tabs">
     <ul class="vdgallery-tabs-link">
-      <li><span class="tabs-link" data-target="tab-1">Galeri</span></li>
-      <li><span class="tabs-link" data-target="tab-2">Slideshow</span></li>
+      <li>
+        <span class="tabs-link" data-target="tab-1">Galeri</span>
+      </li>
+      <li>
+        <span class="tabs-link" data-target="tab-2">Galeri Option</span>
+      </li>
+      <li>
+        <span class="tabs-link" data-target="tab-3">Slideshow Option</span>
+      </li>
     </ul>
     <div class="vdgallery-tabs-opt">
       <div class="tabs-item" data-target="tab-1">
-           
+        <div class="vdgallery-main">
+          <?php if($datagaleri && $datagaleri['media']): ?>
+            <?php foreach($datagaleri['media'] as $galeri): ?>
+              <?php $idunik = uniqid(); ?>
+              <div class="vdgallery-image vdgallery-image-<?php echo $idunik; ?>" data-node="<?php echo $idunik; ?>" data-id="<?php echo $galeri; ?>">
+                  <input name="vdgaleri-post[media][]" value="<?php echo $galeri; ?>" type="hidden">
+                  <img src="<?php echo wp_get_attachment_image_src($galeri)[0]; ?>">
+                  <div class="vdgallery-option">
+                      <span class="vdgallery-remove dashicons dashicons-no-alt"></span>
+                  </div>
+              </div>
+            <?php endforeach; ?>
+          <?php endif; ?>
+        </div>
+        <div class="box-vdgallery-clone">
+          <span class="button vdgallery-add">+ Edit Galeri</span> 
+        </div>
+      </div>
+
+      <div class="tabs-item" data-target="tab-2">
+
         <table>
           <tr>
-            <td>Ukuran tampil</td>
+            <td>Ukuran gambar</td>
             <td>: 
-              <select name="vdgaleri-post[option][size]">
+              <select name="vdgaleri-post[option][size]" class="vdgallery-input">
                 <option value="thumbnail" <?php selected( $datasize,'thumbnail'); ?>>Thumbnail</option>
-                <option value="full" <?php selected( $datasize,'full'); ?>>Full</option>
                 <option value="medium" <?php selected( $datasize,'medium'); ?>>Medium</option>
                 <option value="large" <?php selected( $datasize,'large'); ?>>large</option>
+                <option value="full" <?php selected( $datasize,'full'); ?>>Full</option>
               </select>
             </td>
           </tr>
           <tr>
             <td>Baris tampil</td>
             <td>
-              : <input name="vdgaleri-post[option][kolom]" value="<?php echo $datakolom; ?>" type="number" min="0">
+              : <input name="vdgaleri-post[option][kolom]" value="<?php echo $datakolom; ?>" type="number" min="1" class="vdgallery-input">
             </td>
           </tr>
           <tr>
             <td>Baris tampil responsif</td>
             <td>
-              : <input name="vdgaleri-post[option][kolomresponsif]" value="<?php echo $datakolomres; ?>" type="number" min="0">
+              : <input name="vdgaleri-post[option][kolomresponsif]" value="<?php echo $datakolomres; ?>" type="number" min="1" max="2" class="vdgallery-input">
             </td>
           </tr>
         </table>
 
       </div>
-      <div class="tabs-item" data-target="tab-2">
-        <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+      <div class="tabs-item" data-target="tab-3">
+        <table>
+          <tr>
+            <td>Ukuran gambar</td>
+            <td>: 
+              <select name="vdgaleri-post[option][slidesize]" class="vdgallery-input">
+                <option value="full" <?php selected( $datasizes,'full'); ?>>Full</option>
+                <option value="medium" <?php selected( $datasizes,'medium'); ?>>Medium</option>
+                <option value="large" <?php selected( $datasizes,'large'); ?>>large</option>
+                <option value="thumbnail" <?php selected( $datasizes,'thumbnail'); ?>>Thumbnail</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Tampil per Slide</td>
+            <td>
+              : <input name="vdgaleri-post[option][perslide]" value="<?php echo $dataperslide; ?>" type="number" min="1" class="vdgallery-input">
+            </td>
+          </tr>
+          <tr>
+            <td>Tampil per Slide responsif</td>
+            <td>
+              : <input name="vdgaleri-post[option][persliderespon]" value="<?php echo $dataperslideres; ?>" type="number" min="1" class="vdgallery-input">
+            </td>
+          </tr>
+          <tr>
+            <td>Navigasi</td>
+            <td>: 
+              <select name="vdgaleri-post[option][navbtn]" class="vdgallery-input">
+                <option value=1 <?php selected( $navbtn,1); ?>>Ya</option>
+                <option value=0 <?php selected( $navbtn,0); ?>>Tidak</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Dots</td>
+            <td>: 
+              <select name="vdgaleri-post[option][navdots]" class="vdgallery-input">
+                <option value="1" <?php selected( $navdots,1); ?>>Ya</option>
+                <option value="0" <?php selected( $navdots,0); ?>>Tidak</option>
+              </select>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>

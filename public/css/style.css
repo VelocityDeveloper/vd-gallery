@@ -31,3 +31,7 @@
 .vdgallery-slideshow .flickity-page-dots {
     bottom: .5rem;
 }
+.vdgallery-slideshow .flickity-prev-next-button {
+    width: 25px;
+    height: 25px;
+}

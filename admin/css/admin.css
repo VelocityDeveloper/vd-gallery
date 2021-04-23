@@ -16,6 +16,11 @@
     padding: .2rem;
     visibility: hidden;
 }
+.vdgallery-image img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
 .vdgallery-image:hover .vdgallery-option {
     visibility: visible;
 }

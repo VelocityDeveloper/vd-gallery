@@ -74,6 +74,7 @@ function vdgallery_display_callback( $post ) {
   $navdots            = $datagaleri?$datagaleri['option']['navdots']:'';
   $autoplay           = $datagaleri?$datagaleri['option']['autoplay']:1;
   $infinite           = $datagaleri?$datagaleri['option']['infinite']:1;
+  $galericaption      = $datagaleri?$datagaleri['option']['galericaption']:'tidak';
 
   // print_r($datagaleri);
   wp_nonce_field( basename( __FILE__ ), 'vdgallery_post_nonce' );
@@ -136,6 +137,17 @@ function vdgallery_display_callback( $post ) {
             <td>Baris tampil responsif</td>
             <td>
               : <input name="vdgaleri-post[option][kolomresponsif]" value="<?php echo $datakolomres; ?>" type="number" min="1" max="2" class="vdgallery-input">
+            </td>
+          </tr>
+          <tr>
+            <td>Tampilkan Caption</td>
+            <td>: 
+              <select name="vdgaleri-post[option][galericaption]" class="vdgallery-input">
+                <option value="tidak" <?php selected( $galericaption,'tidak'); ?>>Tidak</option>
+                <option value="hover" <?php selected( $galericaption,'hover'); ?>>Saat Hover</option>
+                <option value="below" <?php selected( $galericaption,'below'); ?>>di Bawah</option>
+                <option value="inside" <?php selected( $galericaption,'inside'); ?>>di Dalam</option>
+              </select>
             </td>
           </tr>
         </table>

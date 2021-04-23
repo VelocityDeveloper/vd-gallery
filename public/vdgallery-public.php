@@ -14,12 +14,13 @@ function vdgallery_showgallery( $atts ) {
     $id         = $atribut['id'];
 
     //set value by meta vdgaleri
-    $vdgaleri   = get_post_meta( $id, 'vdgaleri', true );
-    $size       = $vdgaleri['option']['size']?$vdgaleri['option']['size']:'thumbnail';
-    $kolom      = $vdgaleri['option']['kolom']?$vdgaleri['option']['kolom']:1;
-    $koloms     = 100/$kolom;
-    $kolomres   = $vdgaleri['option']['kolomresponsif']?$vdgaleri['option']['kolomresponsif']:1;
-    $kolomress  = 100/$kolomres;
+    $vdgaleri           = get_post_meta( $id, 'vdgaleri', true );
+    $size               = $vdgaleri['option']['size']?$vdgaleri['option']['size']:'thumbnail';
+    $kolom              = $vdgaleri['option']['kolom']?$vdgaleri['option']['kolom']:1;
+    $koloms             = 100/$kolom;
+    $kolomres           = $vdgaleri['option']['kolomresponsif']?$vdgaleri['option']['kolomresponsif']:1;
+    $kolomress          = 100/$kolomres;    
+    $galericaption      = $vdgaleri['option']['galericaption']?$vdgaleri['option']['galericaption']:'tidak';
 
     ///show if have ID & meta vdgaleri
     if($id && $vdgaleri):
@@ -30,10 +31,27 @@ function vdgallery_showgallery( $atts ) {
 
                 <div class="vdgallery-kolom">
                 <?php foreach($vdgaleri['media'] as $idmedia): ?>
+
+                    <?php 
+                        $mediainfo = get_post($idmedia);
+                        $caption   = $mediainfo->post_excerpt;
+                    ?>
+
                     <div class="vdgallery-item vdgallery-item-<?php echo $idmedia;?>" data-id="<?php echo $idmedia;?>">
-                        <a class="vdgallery-item-link" href="<?php echo wp_get_attachment_image_src($idmedia,'full')[0]; ?>">
-                            <img class="vdgallery-item-image" src="<?php echo wp_get_attachment_image_src($idmedia,$size)[0]; ?>">
-                        </a>
+                        <div class="vdgallery-item-inside">
+                        
+                            <a class="vdgallery-item-link" href="<?php echo wp_get_attachment_image_src($idmedia,'full')[0]; ?>" title="<?php echo $caption;?>">
+                                <img class="vdgallery-item-image" src="<?php echo wp_get_attachment_image_src($idmedia,$size)[0]; ?>">
+                            </a>      
+
+                            <?php if(($galericaption!='tidak') && !empty($caption)): ?>
+                                <span class="vdgallery-item-caption vdgallery-item-caption-<?php echo $galericaption;?>">
+                                    <?php echo $caption;?>
+                                </span>
+                            <?php endif; ?>
+
+                        </div>
+
                     </div>
                 <?php endforeach;?>
                 </div>

@@ -26,9 +26,15 @@
     position: relative;
     display: inline-block;
     overflow: hidden;
+    width: 100%;
+}
+.vdgallery-kolom .vdgallery-item img {
+    margin: 0;    
+    width: 100%;
 }
 .vdgallery-kolom .vdgallery-item a {
     display: inline-block;
+    width: 100%;
 }
 .vdgallery-galleryshow .vdgallery-item-caption-hover,
 .vdgallery-galleryshow .vdgallery-item-caption-inside {

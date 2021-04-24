@@ -2,6 +2,11 @@
 
 VD gallery adalah plugin wordpress sederhana untuk galeri dan slideshow. dari [Velocity Developer](https://velocitydeveloper.com/)
 
+## Version
+```bash
+1.0.1
+```
+
 ## Download
 
 Klik link [download](https://github.com/VelocityDeveloper/vd-gallery/archive/main.zip)

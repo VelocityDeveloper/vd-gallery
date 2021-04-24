@@ -75,6 +75,8 @@ function vdgallery_display_callback( $post ) {
   $autoplay           = $datagaleri?$datagaleri['option']['autoplay']:1;
   $infinite           = $datagaleri?$datagaleri['option']['infinite']:1;
   $galericaption      = $datagaleri?$datagaleri['option']['galericaption']:'tidak';
+  $pagination         = $datagaleri?$datagaleri['option']['pagination']:0;
+  $paginationitem     = $datagaleri?$datagaleri['option']['paginationitem']:9;
 
   // print_r($datagaleri);
   wp_nonce_field( basename( __FILE__ ), 'vdgallery_post_nonce' );
@@ -148,6 +150,21 @@ function vdgallery_display_callback( $post ) {
                 <option value="below" <?php selected( $galericaption,'below'); ?>>di Bawah</option>
                 <option value="inside" <?php selected( $galericaption,'inside'); ?>>di Dalam</option>
               </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Pagination</td>
+            <td>: 
+              <select name="vdgaleri-post[option][pagination]" class="vdgallery-input">
+                <option value=1 <?php selected( $pagination,1); ?>>Ya</option>
+                <option value=0 <?php selected( $pagination,0); ?>>Tidak</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Jumlah gambar per Pagination</td>
+            <td>
+              : <input name="vdgaleri-post[option][paginationitem]" value="<?php echo $paginationitem; ?>" type="number" min="1" class="vdgallery-input">
             </td>
           </tr>
         </table>

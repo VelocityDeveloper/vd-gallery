@@ -57,6 +57,30 @@
 .vdgallery-galleryshow .vdgallery-item-inside:hover .vdgallery-item-caption-hover {    
     bottom: 0;
 }
+.vdgallery-pagination {
+    text-align: center;
+    margin: .3rem 0 1rem;
+}
+.vdgallery-pagi-btn {
+    display: inline-block;
+    margin-bottom: .3rem;
+}
+.vdgallery-pagination .vdgallery-pagi-btn:not(:last-child) {
+    margin-right: .3rem;
+}
+.vdgallery-pagi-btn span {
+    background-color: #fff;
+    border: 1px solid #555;
+    padding: .2rem .5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #333;
+}
+.vdgallery-pagi-btn.active span,
+.vdgallery-pagi-btn:hover span  {
+    background-color: #ddd;
+    border-color: #949494;
+}
 .vdgallery-slideshow .vdgallery-item-image {
     width: 100%;
 }

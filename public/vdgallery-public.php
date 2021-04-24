@@ -21,6 +21,13 @@ function vdgallery_showgallery( $atts ) {
     $kolomres           = $vdgaleri['option']['kolomresponsif']?$vdgaleri['option']['kolomresponsif']:1;
     $kolomress          = 100/$kolomres;    
     $galericaption      = $vdgaleri['option']['galericaption']?$vdgaleri['option']['galericaption']:'tidak';
+    $pagination         = (bool)$vdgaleri['option']['pagination']?$vdgaleri['option']['pagination']:0;
+    $paginationitem     = $vdgaleri['option']['paginationitem']?$vdgaleri['option']['paginationitem']:9;
+
+    //pagination     
+    if($pagination==true) {
+        $pagi = [];
+    }
 
     ///show if have ID & meta vdgaleri
     if($id && $vdgaleri):
@@ -30,6 +37,8 @@ function vdgallery_showgallery( $atts ) {
             <?php if(isset($vdgaleri['media'])&&!empty($vdgaleri['media'])): ?> 
 
                 <div class="vdgallery-kolom">
+                <?php $pagit = 1;?>
+                <?php $urut = 1;?>
                 <?php foreach($vdgaleri['media'] as $idmedia): ?>
 
                     <?php 
@@ -37,7 +46,7 @@ function vdgallery_showgallery( $atts ) {
                         $caption   = $mediainfo->post_excerpt;
                     ?>
 
-                    <div class="vdgallery-item vdgallery-item-<?php echo $idmedia;?>" data-id="<?php echo $idmedia;?>">
+                    <div class="vdgallery-item vdgallery-item-<?php echo $idmedia;?>" data-id="<?php echo $idmedia;?>" data-urut="<?php echo $urut;?>" data-pagi="<?php echo $pagit;?>">
                         <div class="vdgallery-item-inside">
                         
                             <a class="vdgallery-item-link" href="<?php echo wp_get_attachment_image_src($idmedia,'full')[0]; ?>" title="<?php echo $caption;?>">
@@ -53,8 +62,29 @@ function vdgallery_showgallery( $atts ) {
                         </div>
 
                     </div>
+                    <?php 
+                    $pagi[$pagit][] = $idmedia;
+                    if($pagination==true && $urut==$paginationitem) {
+                        $urut = 0;
+                        $pagit++;
+                    }
+                    $urut++;
+                    ?>
                 <?php endforeach;?>
                 </div>
+                
+                <?php
+                //pagination if true
+                if($pagination==true) { 
+                    echo '<div class="vdgallery-pagination" data-node="'.$idnode.'">';
+                    foreach ($pagi as $key => $value) {
+                        echo '<div class="vdgallery-pagi-btn" data-pagi="'.$key.'" data-node="'.$idnode.'">';
+                            echo '<span>'.$key.'</span>';
+                        echo '</div>';
+                    }
+                    echo '</div>';
+                }
+                ?>
 
             <?php endif;?>
 

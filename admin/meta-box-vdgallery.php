@@ -46,7 +46,7 @@ function vdgallery_register_meta_boxes() {
        'vdgallery_display_callback', 
        'vdgallery',
        'normal',
-       'default',
+       'high',
        ''
   );
 }

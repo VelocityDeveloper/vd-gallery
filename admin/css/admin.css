@@ -1,3 +1,6 @@
+.post-type-vdgallery #post-body .postbox-container #normal-sortables .postbox:not(#vdgallery-meta) {
+    display: none;
+}
 .vdgallery-image {
     position: relative;
     display: inline-block;

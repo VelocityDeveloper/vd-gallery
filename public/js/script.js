@@ -1,5 +1,5 @@
 jQuery(function($){
-    $('.vdgallery-galleryshow').each(function() {
+    $('.vdgallery-galleryshow, .vdgallery-slide').each(function() {
         $(this).magnificPopup({
             delegate: 'a',
             type: 'image',

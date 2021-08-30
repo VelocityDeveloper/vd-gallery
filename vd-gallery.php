@@ -61,10 +61,11 @@ add_action('admin_enqueue_scripts', function() {
     wp_enqueue_script('media-upload');
     wp_enqueue_script('thickbox');
     wp_enqueue_style('thickbox');
-
-    wp_enqueue_media(array(
-        'post' => $post->ID,
-    ));
+    if(isset($post->ID)) {
+        wp_enqueue_media(array(
+            'post' => $post->ID,
+        ));
+    }
 });
 
 
@@ -107,8 +108,8 @@ add_action( 'wp_enqueue_scripts', 'vdgallery_scripts_enqueue' );
  */
 add_filter( 'manage_vdgallery_posts_columns', 'set_custom_edit_vdgallery_columns' );
 function set_custom_edit_vdgallery_columns($columns) {
-    $columns['sgaleri'] = __( 'Shortcode Galeri', 'vdgallery' );
-    $columns['sslideshow'] = __( 'Shortcode Slideshow', 'vdgallery' );
+    $columns['sgaleri']     = __( 'Shortcode Galeri', 'vdgallery' );
+    $columns['sslideshow']  = __( 'Shortcode Slideshow', 'vdgallery' );
     return $columns;
 }
 add_action( 'manage_vdgallery_posts_custom_column' , 'custom_vdgallery_column', 10, 2 );

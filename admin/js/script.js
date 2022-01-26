@@ -2,50 +2,54 @@ jQuery(document).ready(function($) {
   var galleryFrame;
   var gallerySelection = [];
 
-  // Frame
-  galleryFrame = wp.media.frames.mysite_gallery_frame = wp.media({
-      title: 'Select Image',
-      button: {
-          text: 'Insert Image'
-      },
-      library: {
-          type: 'image'
-      },
-      multiple: 'add',
-  });
-
-  // Add
-  jQuery('.vdgallery-add').click(function(e) {
-      e.preventDefault();
-      galleryFrame.open();
-  });
-  
-  galleryFrame.on('open', function() {
-    var arrayImages = [];
-    jQuery('.vdgallery-image').each(function(index, element) {
-      var idd = jQuery(this).data('id');
-      if(idd) {
-        arrayImages.push(idd);
-        galleryFrame.state().get('selection').add(wp.media.attachment(idd));
-      }      
+  // Frame  
+  if (typeof wp.media !== 'undefined') {
+    
+    galleryFrame = wp.media.frames.mysite_gallery_frame = wp.media({
+        title: 'Select Image',
+        button: {
+            text: 'Insert Image'
+        },
+        library: {
+            type: 'image'
+        },
+        multiple: 'add',
     });
-  });
 
-  galleryFrame.on('select', function() {
-      gallerySelection = galleryFrame.state().get('selection');
+    // Add
+    jQuery('.vdgallery-add').click(function(e) {
+        e.preventDefault();
+        galleryFrame.open();
+    });
 
-      jQuery(".vdgallery-main").empty();
-
-      gallerySelection.map(function(attachment) {
-          // console.log(attachment);
-          var nodeid = Math.random().toString(36).substring(7);
-          var id = attachment.id;
-          var url = attachment.attributes.sizes.thumbnail?attachment.attributes.sizes.thumbnail.url:attachment.attributes.url;
-
-          jQuery(".vdgallery-main").append(`<div class="vdgallery-image vdgallery-image-${nodeid}" data-node="${nodeid}" data-id="${id}"><input name="vdgaleri-post[media][]" value="${id}" type="hidden"><img src="${url}" alt=""><div class="vdgallery-option"><span class="vdgallery-remove dashicons dashicons-no-alt"></span></div></div>`);
+    galleryFrame.on('open', function() {
+      var arrayImages = [];
+      jQuery('.vdgallery-image').each(function(index, element) {
+        var idd = jQuery(this).data('id');
+        if(idd) {
+          arrayImages.push(idd);
+          galleryFrame.state().get('selection').add(wp.media.attachment(idd));
+        }      
       });
-      // galleryFrame.close();
-  });
+    });
+
+    galleryFrame.on('select', function() {
+        gallerySelection = galleryFrame.state().get('selection');
+
+        jQuery(".vdgallery-main").empty();
+
+        gallerySelection.map(function(attachment) {
+            // console.log(attachment);
+            var nodeid = Math.random().toString(36).substring(7);
+            var id = attachment.id;
+            var url = attachment.attributes.sizes.thumbnail?attachment.attributes.sizes.thumbnail.url:attachment.attributes.url;
+
+            jQuery(".vdgallery-main").append(`<div class="vdgallery-image vdgallery-image-${nodeid}" data-node="${nodeid}" data-id="${id}"><input name="vdgaleri-post[media][]" value="${id}" type="hidden"><img src="${url}" alt=""><div class="vdgallery-option"><span class="vdgallery-remove dashicons dashicons-no-alt"></span></div></div>`);
+        });
+        // galleryFrame.close();
+    });
+    
+  }
   
   // Remove
   jQuery('.vdgallery-main').on('click', '.vdgallery-remove', function() {

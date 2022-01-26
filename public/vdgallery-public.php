@@ -158,7 +158,7 @@ function vdgallery_showslide( $atts ) {
                 <div class="vdgallery-slide" data-flickity='<?php echo $flickity;?>'>
                     <?php foreach($vdgaleri['media'] as $idmedia): ?>
                         <div class="vdgallery-item vdgallery-item-<?php echo $idmedia;?>" data-id="<?php echo $idmedia;?>">
-                        <a class="vdgallery-item-link" target="_blank" href="<?php echo wp_get_attachment_image_src($idmedia,$size)[0]; ?>">  
+                        <a class="vdgallery-item-link" target="_blank" href="<?php echo wp_get_attachment_image_src($idmedia,'full')[0]; ?>">  
                           	<img class="vdgallery-item-image" src="<?php echo wp_get_attachment_image_src($idmedia,$size)[0]; ?>">
                         </a>
                         </div>

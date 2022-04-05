@@ -7,7 +7,7 @@ function vdgallery_save_post_class_meta( $post_id, $post ) {
 
   global $post; 
 
-  if ($post->post_type != 'vdgallery') {
+  if (isset($post->post_type) && $post->post_type != 'vdgallery') {
       return;
   }
 

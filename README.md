@@ -4,7 +4,7 @@ VD gallery adalah plugin wordpress sederhana untuk galeri dan slideshow. dari [V
 
 ## Version
 ```bash
-1.0.2
+1.0.3
 ```
 
 ## Download

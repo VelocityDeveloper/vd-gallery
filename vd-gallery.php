@@ -3,7 +3,7 @@
 Plugin Name: VD Gallery
 Plugin URI: https://velocitydeveloper.com/
 description: Plugin Galeri dari Velocity Developer
-Version: 1.0.2
+Version: 1.0.3
 Author: Velocity Developer
 Author URI: https://velocitydeveloper.com/kontak-kami/
 License: GPL2
@@ -19,7 +19,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'VD_GALLERY_VERSION', '1.0.2' );
+define( 'VD_GALLERY_VERSION', '1.0.3' );
 
 /**
  * Register post type vdgallery

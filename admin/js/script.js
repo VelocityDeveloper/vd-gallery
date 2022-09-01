@@ -23,6 +23,7 @@ jQuery(document).ready(function($) {
     });
 
     galleryFrame.on('open', function() {
+      galleryFrame.state().get('selection').reset();
       var arrayImages = [];
       jQuery('.vdgallery-image').each(function(index, element) {
         var idd = jQuery(this).data('id');

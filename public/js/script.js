@@ -8,16 +8,19 @@ jQuery(function($){
             }
         });
     });
-    $('.gallery').each(function() {
-        $(this).find('.gallery-item').addClass('vd-gallery-modif');
-        $(this).magnificPopup({
-            delegate: '.gallery-item a',
-            type: 'image',
-            gallery: {
-              enabled:true
-            }
+    if($('.gallery .gallery-item').length){
+        $('.gallery .gallery-item').each(function(index, el) {
+            var url = $(el).find('img').attr('src');
+            $(el).find('a').attr('href',url);
+            $(el).magnificPopup({
+                delegate: 'a',
+                type: 'image',
+                gallery: {
+                  enabled:true
+                }
+            });
         });
-    });
+    };
     $('.vdgallery-pagination').each(function() {
         var node = $(this).data('node');
         $('.vdgallery-galleryshow-'+node+' .vdgallery-item').hide();
